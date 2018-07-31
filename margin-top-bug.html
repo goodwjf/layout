@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>margin-top 的bug问题</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    .box {
+      background-color: black;
+    }
+
+    .inner {
+      background-color: red;
+      margin-top: 10px;
+    }
+
+    .box-plan1 {
+      overflow: hidden;
+    }
+
+    .box-plan2 {
+      padding-top: 1px;
+    }
+
+    .box-plan3 {
+      border: 1px solid red;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="box" id="box">
+    <div class="inner" id="child">child</div>
+  </div>
+  <p>margin-top 的bug问题 子元素添加margin-top 父元素也掉下来。 </p>
+  <p>原因：子元素是父元素的第一个元素 子元素没有浮动 父元素没有浮动 父元素没有内填充 父元素没有边框</p>
+  <p>解决方法
+    <ul>
+      <li>
+        <a href="javascript:;" onclick="fun1()"> 1.父元素添加overflow:hidden </a>
+      </li>
+      <li>
+        <a href="javascript:;" onclick="fun2()">2.父元素添加padding-top</a>
+      </li>
+      <li>
+        <a href="javascript:;" onclick="fun3()">3.父元素添加border</a>
+      </li>
+    </ul>
+  </p>
+  <script>
+    var box = document.querySelector('#box')
+    var child = document.querySelector('#child')
+    function init () {
+      box.classList.remove('box-plan1')
+      box.classList.remove('box-plan2')
+      box.classList.remove('box-plan3')
+    }
+    function fun1() {
+      init()
+      box.classList.add('box-plan1')
+    }
+    function fun2() {
+      init()
+      box.classList.add('box-plan2')
+    }
+    function fun3() {
+      init()
+      box.classList.add('box-plan3')
+    }
+  </script>
+</body>
+
+</html>
